@@ -1,0 +1,59 @@
+Legenda:
+
+Arduino Mega 2560: AM
+ESP32: ESP
+Kapacitný senzor TTP223: SEN
+Vyhrievací element: HEAT
+Tlačidlo: BTN
+8x8 LED matrix: MATRIX
+Napájací adaptér 12V/5A: ADAPTER
+Napäťový regulátor LM7805: REG
+Schéma:
+
+                        +---------------------+
+                        |       AM            |
+                        |                     |
+     +-----+     +-----+-----+-----+-----+-----+-----+-----+
+     | SEN |-----| 2  | 4  | 6  | 8  | 10 | 12 | 14 | 16 |-----+
+     +-----+     +-----+-----+-----+-----+-----+-----+-----+     |
+     +-----+     | 3  | 5  | 7  | 9  | 11 | 13 | 15 | 17 |-----+-----+
+     | HEAT|-----+-----+-----+-----+-----+-----+-----+-----+     | AM |
+     +-----+                                                 |     |
+     +-----+     +-----+-----+-----+-----+-----+-----+-----+     |     |
+     | BTN |-----| 18 | 20 | 22 | 24 | 26 | 28 | 30 | 32 |-----+     |
+     +-----+     +-----+-----+-----+-----+-----+-----+-----+     |     |
+                        |                     |                 |     |
+                        +-----+-----+-----+-----+                 |     |
+                              | SDA | SCL | 5V | GND            |     |
+                              +-----+-----+-----+-----+-----------+-----+
+                                      |                     |
+                                      |    MATRIX           |
+                                      |                     |
+                                      +---------------------+
+                                              |
+                        +---------------------+-----+
+                        |       ESP            |     |
+                        |                     |     |
+                        +-----+-----+-----+-----+-----+
+                              | TX  | RX  | 5V | GND |
+                              +-----+-----+-----+-----+
+                                      |
+                                      |
+                             +--------+--------+
+                             | ADAPTER|  REG   |
+                             +--------+--------+
+Vysvetlenie:
+
+Každý senzor (SEN) je pripojený k digitálnemu pinu na Arduine (2, 4, 6, 8, 10, 12, 14, 16).
+Každý vyhrievací element (HEAT) je pripojený k digitálnemu pinu na Arduine (3, 5, 7, 9, 11, 13, 15, 17).
+Každé tlačidlo (BTN) je pripojené k digitálnemu pinu na Arduine (18, 20, 22, 24, 26, 28, 30, 32).
+Matrixový displej (MATRIX) je pripojený k I2C pinom na Arduine (SDA a SCL).
+ESP32 (ESP) je pripojený k sériovým pinom na Arduine (TX a RX).
+Napájací adaptér (ADAPTER) je pripojený k napäťovému regulátoru (REG).
+Arduino Mega a ESP32 sú napájané z 5V výstupu regulátora.
+Poznámky:
+
+Schéma je zjednodušená a nezobrazuje všetky detaily zapojenia (napr. pull-up rezistory pre tlačidlá).
+Pre 7 miest pre mačky a 3+3 pre mačiatka budeš potrebovať 10 senzorov, 10 vyhrievacích elementov a 10 tlačidiel.
+Uisti sa, že piny v kóde zodpovedajú zapojeniu v schéme.
+Pri spájaní dbaj na správnu polaritu komponentov.

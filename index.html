@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Inteligentný pelech pre mačky</h1>
+
+  <h2>Dávkovanie</h2>
+  <form id="feedForm">
+    <label for="grams">Množstvo (g):</label>
+    <input type="number" id="grams" name="grams" min="1" max="50" value="20">
+    <button type="submit">Dávkovať</button>
+  </form>
+
+  <script>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Inteligentný pelech pre mačky</title>
+</head>
+<body>
+  <h1>Inteligentný pelech pre mačky</h1>
+
+  <h2>Obsadenosť</h2>
+  <div id="occupancy"></div>
+
+  <h2>Režim "nerušiť"</h2>
+  <div id="dnd"></div>
+
+  <h2>Kŕmenie</h2>
+  <div id="feeding"></div>
+
+  <script>
+    // Funkcia pre aktualizáciu dát
+    function updateData() {
+      // Získanie dát z ESP32
+      fetch('/occupancy')
+        .then(response => response.text())
+        .then(data => document.getElementById('occupancy').innerText = data);
+
+      fetch('/dnd')
+        .then(response => response.text())
+        .then(data => document.getElementById('dnd').innerText = data);
+
+      fetch('/feeding')
+        .then(response => response.text())
+        .then(data => document.getElementById('feeding').innerText = data);
+    }
+
+    // Aktualizácia dát každú sekundu
+    setInterval(updateData, 1000);
+  </script>
+</body>
+</html>
+
+    // Odoslanie formulára
+    document.getElementById('feedForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const grams = document.getElementById('grams').value;
+      fetch('/feed', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `grams=${grams}`
+      })
+      .then(response => response.text())
+      .then(data => console.log(data));
+    });
+  </script>
+</body>
+</html>
